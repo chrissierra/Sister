@@ -26,8 +26,8 @@
 
                     <div *ngIf="s.select">
                         <select name="" id="" class="form-control" [formControlName]="s.name">
-                        <option [value]="s.name" *ngFor="let o of s.opciones">{{ o }}</option>
-                </select>
+                             <option [value]="s.name" *ngFor="let o of s.opciones">{{ o }}</option>
+                        </select>
                     </div>
 
                     <div  class="alert alert-success" role="alert" *ngIf="forma.controls[s.name].invalid && !forma.controls[s.name].pristine">

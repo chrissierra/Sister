@@ -28,7 +28,7 @@ import { SueldosComponent } from './components/dashboard/sueldos/sueldos.compone
 import { LiberarSueldosComponent } from './components/perfil-trabajador/liberar-sueldos/liberar-sueldos.component';
 
 import { HaberNoImponibleComponent } from './components/perfil-trabajador/haber-no-imponible/haber-no-imponible.component';
-import { DescuentosComponent } from './components/perfil-trabajador/descuentos/descuentos.component';
+import { SueldosLiberadosComponent } from './components/perfil-trabajador/SueldosLiberados/SueldosLiberadosComponent.component';
 import { ResumenComponent } from './components/perfil-trabajador/resumen/resumen.component';
 
 const routes: Routes = [
@@ -50,7 +50,7 @@ const routes: Routes = [
       { path: 'Marcaje' , component: MarcajeComponent},
 
       { path: 'HaberNoImponible' , component: HaberNoImponibleComponent},
-		  { path: 'Descuentos' , component: DescuentosComponent},
+		  { path: 'SueldosLiberados' , component: SueldosLiberadosComponent},
       { path: 'Resumen' , component: ResumenComponent},
 
       { path: 'LiberarSueldos' , component: LiberarSueldosComponent},
@@ -60,12 +60,12 @@ const routes: Routes = [
   { path: 'Ingresa', component: IngresaComponent, children: [
 
 { path: 'paso1' , component: PasounoComponent},
-{ path: 'paso2' , component: PasodosComponent},
+{ path: 'paso2/:formato' , component: PasodosComponent},
 { path: 'paso3' , component: PasotresComponent},
   ]
    },
  { path: 'Home', component: HomeComponent },
- { path: '**', component: LoginComponent }
+ { path: '**', component: HomeComponent }
 ];
 
 export const peo =  RouterModule.forRoot(routes);

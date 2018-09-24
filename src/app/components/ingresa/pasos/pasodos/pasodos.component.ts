@@ -3,7 +3,7 @@ import { EmpleadoService} from '../../interfaces/empleado.service';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { Observable } from 'rxjs/Rx';
 import { IngresoUsuarioServidorService } from '../../../../services/ingreso-usuario-servidor.service';
-
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-pasodos',
@@ -13,10 +13,13 @@ export class PasodosComponent {
   forma: FormGroup;
   Empleado: any[];
 
-  constructor(public servicio_empleado: IngresoUsuarioServidorService, public empleado: EmpleadoService) {
-
-
-    this.Empleado = this.empleado.array_empleado;
+  constructor(public servicio_empleado: IngresoUsuarioServidorService, 
+              public empleadoService_: EmpleadoService, 
+              private router: Router, 
+              private param: ActivatedRoute,) {
+ 
+   
+    this.Empleado = this.empleadoService_.array_empleado;
     console.log(this.Empleado[0].name);
     this.forma = new FormGroup({
 
@@ -44,15 +47,15 @@ export class PasodosComponent {
        });
 
 
-   }
+   }  // Fin Constructor
 
    onSubmit(forma) {
 
      this.servicio_empleado.insertar_usuario_datos_generales((forma.value));
-
-     console.log('forma', forma);
-     console.log('errores', forma.controls["Nombre"]);
-     console.log('forma_VALORES json stringigy', JSON.parse(JSON.stringify(forma.value)));
-   }
+     console.log(forma.value)
+     if(this.param.snapshot.paramMap.get('formato')){
+           // this.router.navigate(['./Ingresa/paso3/']);
+     } // *** Agregar si es manual, donde va, un toast que diga que está ok.  ***
+   } // Fin función onSubmit
 
 }

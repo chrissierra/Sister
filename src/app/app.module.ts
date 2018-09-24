@@ -11,8 +11,21 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatListModule} from '@angular/material/list';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material';
+
+//Firebase
+import { environment } from './enviroments/enviroments';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 
+//Camara
+import {WebcamModule} from 'ngx-webcam';
 
 // Angular maps
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
@@ -45,7 +58,7 @@ import { MarcajeComponent } from './components/perfil-trabajador/marcaje/marcaje
 import { SueldosComponent } from './components/dashboard/sueldos/sueldos.component';
 import { LiberarSueldosComponent } from './components/perfil-trabajador/liberar-sueldos/liberar-sueldos.component';
 import { HaberNoImponibleComponent } from './components/perfil-trabajador/haber-no-imponible/haber-no-imponible.component';
-import { DescuentosComponent } from './components/perfil-trabajador/descuentos/descuentos.component';
+import { SueldosLiberadosComponent } from './components/perfil-trabajador/SueldosLiberados/SueldosLiberadosComponent.component';
 import { ResumenComponent } from './components/perfil-trabajador/resumen/resumen.component';
 
 // servicios
@@ -62,6 +75,8 @@ import { GuardarSucursalService } from './services/guardar-sucursal.service';
 import { MarcajeServiceService } from './services/marcaje-service.service';
 import { AppService } from './app.service';
 import { SueldosService } from './services/sueldos.service';
+import { VisualizacionLiquidacionesComponent } from './components/perfil-trabajador/visualizacion-liquidaciones/visualizacion-liquidaciones.component';
+import { CrudService } from './services/crud.service';
 
 
 
@@ -94,11 +109,17 @@ import { SueldosService } from './services/sueldos.service';
     SueldosComponent,
     LiberarSueldosComponent,
     HaberNoImponibleComponent,
-    DescuentosComponent,
-    ResumenComponent
+    SueldosLiberadosComponent,
+    ResumenComponent,
+    VisualizacionLiquidacionesComponent
   ],
   imports: [
     BrowserModule,
+    WebcamModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig), // imports firebase/app needed for everything
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
+    AngularFireStorageModule, // imports firebase/storage only needed for storage features
     peo,
     FormsModule,
     ReactiveFormsModule,
@@ -110,6 +131,10 @@ import { SueldosService } from './services/sueldos.service';
     MatSnackBarModule,
     MatGridListModule,
     MatListModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatStepperModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAdXTtlsdlutwezrknwZowxSwHV0r__pnE'
     })
@@ -125,7 +150,8 @@ import { SueldosService } from './services/sueldos.service';
               GuardarSucursalService,
               MarcajeServiceService,
               AppService,
-              SueldosService],
+              SueldosService,
+              CrudService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

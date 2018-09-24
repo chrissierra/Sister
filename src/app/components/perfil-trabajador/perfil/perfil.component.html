@@ -20,7 +20,7 @@
     <br>
     <ul class="list-group">
 
-        <li *ngFor="let turnos_sin_liberar of turnos_sin_liberar" class="list-group-item">Liberación pendiente {{turnos_sin_liberar.mes}}/{{turnos_sin_liberar.anio}} <button [routerLink]="['../LiberarTurnos/',turnos_sin_liberar.mes, turnos_sin_liberar.anio]" style="float:right" type="button" class="btn btn-success btn-sm">Liberar</button>
+        <li *ngFor="let turnos_sin_liberar of turnos_sin_liberar | async" class="list-group-item">Liberación pendiente {{turnos_sin_liberar.mes}}/{{turnos_sin_liberar.anio}} <button [routerLink]="['../LiberarTurnos/',turnos_sin_liberar.mes, turnos_sin_liberar.anio]" style="float:right" type="button" class="btn btn-success btn-sm">Liberar</button>
         </li>
 
     </ul>
@@ -28,7 +28,7 @@
 
 
     <div *ngIf="entrada !== 0">
-
+        
         <h2> Resumen Asistencia del día: </h2>
         <div class="card">
             <div class="card-body">

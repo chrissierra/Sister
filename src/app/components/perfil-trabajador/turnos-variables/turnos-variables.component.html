@@ -4,7 +4,7 @@
         <label for="exampleFormControlSelect1">Meses pendientes de turnos: </label>
         <select class="form-control" [(ngModel)]="meses_select" #heroInput="ngModel">
 
-			      <option *ngFor="let meses_pendienes_de_hacer_turnos of meses_pendienes_de_hacer_turnos; let i = index" [value]="meses_pendienes_de_hacer_turnos">{{meses_pendienes_de_hacer_turnos}}</option>
+			      <option *ngFor="let meses_pendienes_de_hacer_turnos of meses_pendienes_de_hacer_turnos | async; let i = index" [value]="meses_pendienes_de_hacer_turnos">{{meses_pendienes_de_hacer_turnos}}</option>
 
 			    </select>
         <br>
@@ -19,7 +19,7 @@
     <form #forma='ngForm' (ngSubmit)="guardar(forma)" #forma="ngForm">
 
 
-        <div *ngFor="let dias_a_mostrar of dias_a_mostrar; let i = index" class="form-group">
+        <div *ngFor="let dias_a_mostrar of dias_a_mostrar | async; let i = index" class="form-group">
             <label for="exampleInputEmail1">Entrada {{ dias_a_mostrar }} {{ i+1 }}/{{mes}}/{{ anio }}</label>
 
             <input type="time" class="form-control" name="{{i+1}}e" ngModel id="{{i+1}}e">

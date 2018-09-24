@@ -40,7 +40,7 @@ export class LiberarSueldosComponent  {
              this.SueldoServicio_.getComisionAfp(this.DatosTrabajador.afp).subscribe( data_afp => {
                 
                 this.ComisionAfp = data_afp[0].monto;
-                // this.TotalHaberImponible = (( this.ComisionAfp + 7 / 100 ) + 1 ) * data_perfil[0].sueldo;
+                
                 this.TotalHaberImponible_temp =  (((  (this.ComisionAfp*1) + 7 ) / 100)+1)* data_perfil[0].sueldo;
                 this.TotalHaberImponible = this.TotalHaberImponible_temp;
                 console.log("Viendo porq no muestra la variable",this.TotalHaberImponible)
