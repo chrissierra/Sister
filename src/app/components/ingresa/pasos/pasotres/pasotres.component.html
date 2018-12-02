@@ -1,3 +1,11 @@
-<p>
-  pasotres works!
-</p>
+  
+
+   <image-upload
+  [url]="url"
+  buttonCaption="Presiona para agregar imagen"
+  dropBoxMessage="Puedes arrastrar una imagen acá"
+  clearButtonCaption="Borrar"
+   (removed)="onRemoved($event)"
+  (uploadFinished)="onUploadFinished($event)"
+  (uploadStateChanged)="onUploadStateChanged($event)">
+</image-upload>

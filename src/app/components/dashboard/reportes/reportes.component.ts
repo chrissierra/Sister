@@ -5,10 +5,21 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './reportes.component.html'
 })
 export class ReportesComponent implements OnInit {
+	
+	public nombreEmpresa:any;
 
-  constructor() { }
+  constructor() {
+
+  	this.nombreEmpresa = localStorage.getItem("nombre_empresa");
+
+   }
 
   ngOnInit() {
   }
 
+
+
+
+
+  
 }

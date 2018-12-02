@@ -9,6 +9,7 @@ export class PerfilEmpleadorComponent implements OnInit {
 
   nombre:string;
   constructor() {
+  	
      this.nombre = localStorage.getItem('nombre_rep');
 
    }

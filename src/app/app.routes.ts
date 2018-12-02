@@ -28,17 +28,30 @@ import { SueldosComponent } from './components/dashboard/sueldos/sueldos.compone
 import { LiberarSueldosComponent } from './components/perfil-trabajador/liberar-sueldos/liberar-sueldos.component';
 
 import { HaberNoImponibleComponent } from './components/perfil-trabajador/haber-no-imponible/haber-no-imponible.component';
-import { DescuentosComponent } from './components/perfil-trabajador/descuentos/descuentos.component';
+import { SueldosLiberadosComponent } from './components/perfil-trabajador/SueldosLiberados/SueldosLiberadosComponent.component';
 import { ResumenComponent } from './components/perfil-trabajador/resumen/resumen.component';
+import { ActualizarTurnosFijosComponent } from './components/perfil-trabajador/actualizar-turnos-fijos/actualizar-turnos-fijos.component';
+
+import { RepasistenciadiarioComponent } from './components/dashboard/reportes/repasistenciadiario/repasistenciadiario.component';
+import { RepasistenciamensualComponent } from './components/dashboard/reportes/repasistenciamensual/repasistenciamensual.component';
+
+import {SaveFormsGuard} from './guards/save-forms-guard';
 
 const routes: Routes = [
   { path: 'Login', component: LoginComponent },
+  
   { path: 'DashBoard', component: DashBoardComponent, children: [
    
     { path: 'PerfilEmpleador' , component: PerfilEmpleadorComponent},
     { path: 'IngresoSucursal' , component: IngresoSucursalComponent},
     { path: 'SueldosComponent' , component: SueldosComponent},
-    { path: 'Reportes' , component: ReportesComponent},
+    { path: 'Reportes' , component: ReportesComponent, children:[
+      
+        { path: 'ReporteDiarioAsistencia' , component: RepasistenciadiarioComponent},      
+        { path: 'ReporteMensualAsistencia' , component: RepasistenciamensualComponent},
+
+
+        ]},
     { path: '**', component: PerfilEmpleadorComponent }
 
   ] },
@@ -48,9 +61,9 @@ const routes: Routes = [
 		  { path: 'TurnosVariables' , component: TurnosVariablesComponent},
 		  { path: 'TurnosFijos' , component: TurnosFijosComponent},
       { path: 'Marcaje' , component: MarcajeComponent},
-
+      { path: 'ActualizarTurnosFijos', component: ActualizarTurnosFijosComponent },
       { path: 'HaberNoImponible' , component: HaberNoImponibleComponent},
-		  { path: 'Descuentos' , component: DescuentosComponent},
+		  { path: 'SueldosLiberados' , component: SueldosLiberadosComponent},
       { path: 'Resumen' , component: ResumenComponent},
 
       { path: 'LiberarSueldos' , component: LiberarSueldosComponent},
@@ -60,8 +73,8 @@ const routes: Routes = [
   { path: 'Ingresa', component: IngresaComponent, children: [
 
 { path: 'paso1' , component: PasounoComponent},
-{ path: 'paso2' , component: PasodosComponent},
-{ path: 'paso3' , component: PasotresComponent},
+{ path: 'paso2/:formato' , component: PasodosComponent},
+{ path: 'paso3/:rut' , component: PasotresComponent,  canDeactivate: [SaveFormsGuard]},
   ]
    },
  { path: 'Home', component: HomeComponent },

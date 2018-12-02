@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
+import { ImageUploadModule } from "angular2-image-upload";
 
 // Angular material
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -11,8 +12,16 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatListModule} from '@angular/material/list';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+//import {MatMomentDateModule} from '@angular/material-moment-adapter';
+ import {MatNativeDateModule} from '@angular/material';
 
-
+//Guards
+import {SaveFormsGuard} from './guards/save-forms-guard';
 
 // Angular maps
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
@@ -45,8 +54,14 @@ import { MarcajeComponent } from './components/perfil-trabajador/marcaje/marcaje
 import { SueldosComponent } from './components/dashboard/sueldos/sueldos.component';
 import { LiberarSueldosComponent } from './components/perfil-trabajador/liberar-sueldos/liberar-sueldos.component';
 import { HaberNoImponibleComponent } from './components/perfil-trabajador/haber-no-imponible/haber-no-imponible.component';
-import { DescuentosComponent } from './components/perfil-trabajador/descuentos/descuentos.component';
+import { SueldosLiberadosComponent } from './components/perfil-trabajador/SueldosLiberados/SueldosLiberadosComponent.component';
 import { ResumenComponent } from './components/perfil-trabajador/resumen/resumen.component';
+import { VisualizacionLiquidacionesComponent } from './components/perfil-trabajador/visualizacion-liquidaciones/visualizacion-liquidaciones.component';
+import { ActualizarTurnosFijosComponent } from './components/perfil-trabajador/actualizar-turnos-fijos/actualizar-turnos-fijos.component';
+import { RepasistenciadiarioComponent } from './components/dashboard/reportes/repasistenciadiario/repasistenciadiario.component';
+import { RepasistenciamensualComponent } from './components/dashboard/reportes/repasistenciamensual/repasistenciamensual.component';
+
+
 
 // servicios
 import { EmpleadoService } from './components/ingresa/interfaces/empleado.service';
@@ -56,15 +71,20 @@ import { RutasservidorService } from './services/rutasservidor.service';
 import { PlanillaservicesService } from './services/planillaservices.service';
 import { PerfilTrabajadorServiceService } from './services/perfil-trabajador-service.service';
 import { LiberarTurnosService } from './services/liberar-turnos.service';
-import { EntradaosalidaPipe } from './pipes/entradaosalida.pipe';
-import { NombreDelDiaDelMesPipe } from './pipes/nombre-del-dia-del-mes.pipe';
+
 import { GuardarSucursalService } from './services/guardar-sucursal.service';
 import { MarcajeServiceService } from './services/marcaje-service.service';
 import { AppService } from './app.service';
 import { SueldosService } from './services/sueldos.service';
+import { MensajesSwalService } from './services/mensajes-swal.service';
+import { LibroremuneracionesService } from './services/libroremuneraciones.service';
+import { GeolocalizacionService } from './services/geolocalizacion.service';
 
-
-
+//Pipes
+import { EntradaosalidaPipe } from './pipes/entradaosalida.pipe';
+import { NombreDelDiaDelMesPipe } from './pipes/nombre-del-dia-del-mes.pipe';
+import { getHoraPipe } from './pipes/getHoraPipe.pipe';
+import { getDiaPipe } from './pipes/getDia.pipe';
 
 
 @NgModule({
@@ -86,6 +106,8 @@ import { SueldosService } from './services/sueldos.service';
     LiberarTurnosComponent,
     EntradaosalidaPipe,
     NombreDelDiaDelMesPipe,
+    getHoraPipe,
+    getDiaPipe,
     DashBoardComponent,
     PerfilEmpleadorComponent,
     IngresoSucursalComponent,
@@ -94,13 +116,18 @@ import { SueldosService } from './services/sueldos.service';
     SueldosComponent,
     LiberarSueldosComponent,
     HaberNoImponibleComponent,
-    DescuentosComponent,
-    ResumenComponent
+    SueldosLiberadosComponent,
+    ResumenComponent,
+    VisualizacionLiquidacionesComponent,
+    ActualizarTurnosFijosComponent,
+    RepasistenciadiarioComponent,
+    RepasistenciamensualComponent
   ],
   imports: [
     BrowserModule,
     peo,
     FormsModule,
+    ImageUploadModule.forRoot(),
     ReactiveFormsModule,
     HttpClientModule,
     HttpModule,
@@ -110,8 +137,15 @@ import { SueldosService } from './services/sueldos.service';
     MatSnackBarModule,
     MatGridListModule,
     MatListModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule,
+    MatDatepickerModule,
+  
+    MatNativeDateModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAdXTtlsdlutwezrknwZowxSwHV0r__pnE'
+      apiKey: 'AIzaSyDNSFFyJn6a_AIm44b_7atfg_ml4NI6ReY'
     })
   ],
   providers: [EmpleadoService,
@@ -125,7 +159,11 @@ import { SueldosService } from './services/sueldos.service';
               GuardarSucursalService,
               MarcajeServiceService,
               AppService,
-              SueldosService],
+              SaveFormsGuard,
+              SueldosService,
+              MensajesSwalService,
+              LibroremuneracionesService,
+              GeolocalizacionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
